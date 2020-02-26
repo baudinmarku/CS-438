@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="./resources/style.css">
     <meta charset="utf-8" />
     <title>
-        CS438002: Assignment 2 (Last Name, First Name, Student Number)
+        CS438002: Assignment 2 (Marku, Baudin, 31460156)
     </title>
 
     <script type="text/javascript" src="./resources/init.js"></script>
@@ -25,7 +25,7 @@
         <div class="textdiv">
             <h2>Assignment 2</h2>
             <p>
-                Author: Last Name, First Name, Student Number
+                Author: Marku, Baudin, 31460156
             </p>
             <p>
                 Date: 2/14/2020<br />
@@ -133,9 +133,35 @@
         <div class="textdiv">
             <h3>Documentation</h3>
             <p>
-                Please write a short report here.
-                It should list what you have implemented, as well as a brief discussion and your conclusions.
-                Also add as many comments in your code as possible---it will help us in judging your work.
+                For task 1, I first began by rotating the Earth with respect to the Sun 
+                on the Y-axis at the speed of a year because it takes a year for the Earth
+                to orbit the sun. I then gave it its tilt angle by rotating it about the 
+                X-axis by -23.44 degrees with respect to its own orbit. I then translated
+                the Earth 0.75 on the X-axis to shift it outside of the Sun. I then
+                rotated the Earth with respect to itself on the Y-axis at the speed of a
+                day because it takes one day for the Earth to rotate about itself. Finally,
+                I scaled the Earth down to fit the size similar to the solution provided above.
+            </p>
+            <p>
+                For task 2, I first began by rotating the Moon with respect to the Sun
+                on the Y-axis at the speed of a year to follow the Earth's orbit of the Sun.
+                I then translated the Moon to be at the exact location of the Earth in order 
+                to rotate it again with respect to the Earth on the Y-axis this time at the 
+                speed of a month because it takes roughly a month for the Moon to orbit the 
+                Earth. I then gave the Moon its tilt angle of -5.14 degrees by rotating it 
+                on the X-axis. I then translated the Moon outside of the Earth's position 
+                by 0.15 in the X direction. I then added a final rotation with respect to 
+                itself on the Y-axis with the speed of a month because the Moon takes roughly 
+                a month to rotate about itself. Finally, I scaled the size of the moon down 
+                even smaller than that of the Earth to fit the size similar to the solution
+                provided above.
+            </p>
+            <p>
+                For task 3, I used the uniform vec3 u_color and combined it with the attribute
+                vec3 a_color in order to create shading for the planet. By combining the u_color
+                and a_color as shown in the slides 08 on canvas, and messing with the hsvToRgb() 
+                values in the different spheres, I was able to get colors similar to the solution
+                provided above. 
             </p>
         </div>
 

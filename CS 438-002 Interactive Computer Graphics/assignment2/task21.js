@@ -24,8 +24,7 @@ void main()
     // Remark: if you are interested how the sphere is created and the noise is sampled, 
     // check the function sphereGeometry(...) below. 
     
-    // *** code here ***
-    //v_color = vec4(a_color, 1.0);   
+    // *** code here ***   
     v_color = vec4(u_color + 0.5 * (a_color - 0.5), u_alpha);
     gl_Position = u_model * vec4(a_position, 1.0);    
 
