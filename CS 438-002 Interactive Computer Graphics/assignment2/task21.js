@@ -25,9 +25,11 @@ void main()
     // check the function sphereGeometry(...) below. 
     
     // *** code here ***
-    v_color = vec4(a_color, 1.0);   
-
+    //v_color = vec4(a_color, 1.0);   
+    v_color = vec4(u_color + 0.5 * (a_color - 0.5), u_alpha);
     gl_Position = u_model * vec4(a_position, 1.0);    
+
+    
 }`;
 
 const fragmentShaderSrc = glsl`    
@@ -311,7 +313,7 @@ function main() {
             gl.uniformMatrix4fv(modelMatLocation, false, flatten(mmat));
 
             // set sun color and alpha
-            gl.uniform3fv(colorLocation, hsvToRgb(0.11, 1, 1));
+            gl.uniform3fv(colorLocation, hsvToRgb(0.08, 1.0, 1.0));
             gl.uniform1f(alphaLocation, 0.75);
 
             // draw the geometry                                   
@@ -337,6 +339,27 @@ function main() {
             // Additionally, set its u_color uniform variable accordingly.  
 
             // *** code here ***
+            // Earth rotation wrt the sun
+            mmat = mult(mmat, rotateY(year));
+            
+            // Earth tilt angle wrt its orbit axis
+            mmat = mult(mmat, rotateX(-23.44));
+
+            // move Earth by translation
+            mmat = mult(mmat, translate(0.75, 0, 0));
+
+            // Earth rotation wrt itself
+            mmat = mult(mmat, rotateY(day));
+
+            // Earth size by scaling
+            mmat = mult(mmat, scalem(0.1, 0.1, 0.1));
+
+            // set Earth model matrix            
+            gl.uniformMatrix4fv(modelMatLocation, false, flatten(mmat));
+
+            // set Earth color and alpha
+            gl.uniform3fv(colorLocation, hsvToRgb(0.625, 1.0, 0.75));
+            gl.uniform1f(alphaLocation, 0.75);
 
             // draw the geometry                        
             gl.drawElements(gl.TRIANGLES, geometry.indices.length, gl.UNSIGNED_SHORT, 0);
@@ -360,10 +383,36 @@ function main() {
             // Additionally, set its u_color uniform variable accordingly.  
 
             // *** code here ***
+            // Moon rotation wrt the Sun
+            mmat = mult(mmat, rotateY(year));
 
-            // draw the geometry                                   
+            // Moon translation wrt the Earth
+            mmat = mult(mmat, translate(0.75, 0, 0));
+            
+            // Moon rotation wrt the Earth
+            mmat = mult(mmat, rotateY(month));
+
+            // Moon tilt angle wrt its orbit axis around the Earth
+            mmat = mult(mmat, rotateX(-5.14));
+                        
+            // move Moon by translation
+            mmat = mult(mmat, translate(0.15, 0, 0));
+
+            // Moon rotation wrt itself
+            mmat = mult(mmat, rotateY(month));
+
+            // Moon size by scaling
+            mmat = mult(mmat, scalem(0.03, 0.03, 0.03));
+
+            // set Moon model matrix            
+            gl.uniformMatrix4fv(modelMatLocation, false, flatten(mmat));
+
+            // set Moon color and alpha
+            gl.uniform3fv(colorLocation, hsvToRgb(0.25, 1.0, 0.0));
+            gl.uniform1f(alphaLocation, 0.75);
+
+            // draw the geometry                        
             gl.drawElements(gl.TRIANGLES, geometry.indices.length, gl.UNSIGNED_SHORT, 0);
-
         }
 
         // request next frame from the browser and render (it is an infinite loop)
